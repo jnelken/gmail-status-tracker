@@ -1,0 +1,33 @@
+{
+  "name": "gmail-status-tracker",
+  "version": "2.7.3-beta",
+  "description": "A Google Apps Script that automatically exports labeled Gmail emails to a Google Sheets spreadsheet for status tracking and organization.",
+  "main": "main.gs",
+  "scripts": {
+    "version": "node scripts/update-version.js",
+    "changelog": "node scripts/generate-changelog.js",
+    "release": "node scripts/create-release.js",
+    "deploy": "npm run version && npm run changelog && clasp push && npm run release",
+    "deploy:patch": "npm version patch && npm run deploy",
+    "deploy:minor": "npm version minor && npm run deploy",
+    "deploy:major": "npm version major && npm run deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnelken/gmail-status-tracker.git"
+  },
+  "keywords": [
+    "gmail",
+    "google-apps-script",
+    "google-sheets",
+    "automation",
+    "email-tracking"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@octokit/rest": "^20.0.2",
+    "conventional-changelog": "^5.1.0",
+    "conventional-changelog-cli": "^4.1.0"
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/**
+scripts/**
+.git/**
+README.md
+CHANGELOG.md
+package.json
+package-lock.json
+.gitignore
+.claspignore

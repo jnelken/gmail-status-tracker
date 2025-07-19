@@ -28,6 +28,9 @@ function exportStatusTrackerEmails() {
       .filter(id => id), // Remove empty values
   );
 
+  // Get ignored thread IDs to skip processing
+  const ignoredThreadIds = getIgnoredThreadIds();
+
   // Search for emails with the configured label
   const threads = GmailApp.search(`label:${GMAIL_LABEL}`, 0, 500);
   const newEmails = [];
@@ -35,8 +38,8 @@ function exportStatusTrackerEmails() {
   threads.forEach(thread => {
     const threadId = thread.getId();
 
-    // Skip if we've already processed this thread
-    if (existingThreadIds.has(threadId)) {
+    // Skip if we've already processed this thread or if it's ignored
+    if (existingThreadIds.has(threadId) || ignoredThreadIds.has(threadId)) {
       return;
     }
 
@@ -118,9 +121,12 @@ function exportStatusTrackerEmails() {
     Logger.log('No new emails found with the configured label.');
   }
   
+  // Process emails marked as ignored (move them to ignored sheet)
+  const movedIgnoredCount = processIgnoredEmails();
+  
   // Record sync activity - manual operations only
   try {
-    recordSyncActivity('Email', newEmails.length, 0, 0);
+    recordSyncActivity('Email', newEmails.length, 0, movedIgnoredCount);
   } catch (error) {
     Logger.log(`Sync activity recording skipped (likely auto-sync): ${error}`);
   }

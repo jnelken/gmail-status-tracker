@@ -17,6 +17,9 @@ function backfillSenderEmails(sheet, columnMap) {
   const threadIdCol = columnMap[EMAIL_THREAD_ID];
   const allData = sheet.getDataRange().getValues();
 
+  // Get ignored thread IDs to skip processing
+  const ignoredThreadIds = getIgnoredThreadIds();
+
   // Find rows with Thread ID but missing Sender Name, Email, Company, or Account
   const rowsToUpdate = [];
   let totalRowsChecked = 0;
@@ -43,6 +46,12 @@ function backfillSenderEmails(sheet, columnMap) {
           i + 1
         }: Thread ID "${threadId}", Name: "${senderName}", Email: "${senderEmail}", Company: "${company}", Account: "${account}"`,
       );
+    }
+
+    // Skip if this thread ID is in the ignored list
+    if (!isBlankField(threadId) && ignoredThreadIds.has(threadId)) {
+      Logger.log(`Row ${i + 1}: Skipping ignored thread ID "${threadId}"`);
+      continue;
     }
 
     // Check for any blank fields that we can backfill
@@ -206,7 +215,11 @@ function backfillFromGmail() {
         .filter(id => id),
     );
 
+    // Get ignored thread IDs to skip processing
+    const ignoredThreadIds = getIgnoredThreadIds();
+
     Logger.log(`Found ${existingThreadIds.size} existing Thread IDs in sheet`);
+    Logger.log(`Found ${ignoredThreadIds.size} ignored Thread IDs to skip`);
 
     // Search for ALL emails with the configured label (ignoring existing ones)
     const threads = GmailApp.search(`label:${GMAIL_LABEL}`, 0, 500);
@@ -219,6 +232,12 @@ function backfillFromGmail() {
 
     threads.forEach(thread => {
       const threadId = thread.getId();
+
+      // Skip if this thread ID is in the ignored list
+      if (ignoredThreadIds.has(threadId)) {
+        Logger.log(`Skipping ignored thread ID: ${threadId}`);
+        return;
+      }
 
       // Check if this thread exists in the sheet
       if (existingThreadIds.has(threadId)) {

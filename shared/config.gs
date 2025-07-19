@@ -11,6 +11,9 @@ const EMAIL_ACCOUNT = 'Account';
 const EMAIL_VERSION = 'Version';
 const EMAIL_SENT_ON = 'Sent On';
 
+// status value for ignored emails
+const EMAIL_STATUS_IGNORE_VALUE = 'Ignore';
+
 // Column name constants for calendar events
 const CALENDAR_EVENT_ID = 'Event ID';
 const CALENDAR_DATE = 'Date';
@@ -43,6 +46,7 @@ const SHEET_EMAILS = 'Emails';
 const SHEET_CALENDAR_EVENTS = 'Events';
 const SHEET_CONFIGURATION = 'Configuration';
 const SHEET_SYNC_ACTIVITY = 'Sync Activity';
+const SHEET_IGNORED_EMAILS = 'Ignored Emails';
 
 // Email headers array for easy reference
 function getEmailHeaders() {

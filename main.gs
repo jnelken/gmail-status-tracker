@@ -15,5 +15,7 @@ function onOpen() {
     .addSeparator()
     .addItem('Backfill from Gmail', 'backfillFromGmail')
     .addItem('Deduplicate Email Sheet', 'deduplicateEmailSheet')
+    .addSeparator()
+    .addItem('Process Ignored Emails', 'processIgnoredEmails')
     .addToUi();
 }

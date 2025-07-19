@@ -7,4 +7,4 @@
 // - You can use multiple gmail accounts. Any account with edit access to the
 //   spreadsheet will be able to run the script.
 const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID_HERE';
-const GMAIL_LABEL = 'gmail-tracker';
+const GMAIL_LABEL = 'status-tracker';

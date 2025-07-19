@@ -2,7 +2,7 @@
 
 function onOpen() {
   const ui = SpreadsheetApp.getUi();
-  ui.createMenu('Status Tracker v2.8.0')
+  ui.createMenu('Status Tracker v2.8.1')
     .addItem('Sync All (Gmail + Calendar)', 'syncAllData')
     .addItem('Request Sync from All Accounts', 'requestSyncFromAllAccounts')
     .addSeparator()

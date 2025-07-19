@@ -1,6 +1,6 @@
 {
   "name": "gmail-status-tracker",
-  "version": "2.7.3-beta",
+  "version": "2.8.0",
   "description": "A Google Apps Script that automatically exports labeled Gmail emails to a Google Sheets spreadsheet for status tracking and organization.",
   "main": "main.gs",
   "scripts": {

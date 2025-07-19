@@ -2,6 +2,8 @@
 
 A Google Apps Script that automatically exports labeled Gmail emails to a Google Sheets spreadsheet for status tracking and organization.
 
+![image preview](./preview-img.png)
+
 ## Features
 
 - **Gmail & Calendar Integration** - Tracks both emails and calendar events
